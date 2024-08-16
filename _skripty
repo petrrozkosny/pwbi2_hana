@@ -33,4 +33,24 @@ VAR alternativa = MAXX(ALL(data[rok]),CALCULATE(SUM(data[Srazky])))
 RETURN
 MAXX(_tabulka,[rocni srazky])
 
+________________________________________
+
+52 roky s nejvyssim poctem tropickych dnu = 
+-- tj. datumu s teplotou > 30
+-- tabulku se vsemi roky a sloupcem s poctem datumu s teplotou nad 30
+
+VAR _tabulka =
+ADDCOLUMNS(
+    ALL(data[rok]),
+"pocet dnu",
+CALCULATE(
+    COUNT(data[rok])
+    ,data[Teplota] >30))
+VAR _maximalni_hodnota = MAXX(_tabulka,[pocet dnu])
+RETURN
+-- zretezit hodnoty z tabulky vracnee funkci filter
+CONCATENATEX(
+FILTER(_tabulka,[pocet dnu] = _maximalni_hodnota),
+data[rok],", ")
+
 
