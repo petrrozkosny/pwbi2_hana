@@ -88,3 +88,14 @@ ROW("agregacni_funkce","soucet","vypocet",CALCULATE(SUM(data[Srazky]))),
 ROW("agregacni_funkce","prumer","vypocet",CALCULATE(AVERAGE(data[Srazky]))),
 ROW("agregacni_funkce","maximum","vypocet",CALCULATE(MAX(data[Srazky])))
 ))
+______________________________________________
+
+
+72 kontrola filtru = 
+
+SWITCH(TRUE(),
+    HASONEFILTER(dim_lokality[Lokalita]),
+    "Počítám data za lokalitu ...."
+    ,ISFILTERED(dim_lokality[Lokalita]),
+    "Vyber si JEDINOU lokalitu",
+    "Kliknutím do tabulky vyber lokalitu")
