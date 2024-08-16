@@ -13,3 +13,24 @@ VAR _maximum = MAXX(_tabulka,[suma srazek])
 
 RETURN
 IF(_suma_srazek = _maximum,2,"CYAN")
+
+__________________
+
+51 maximalni rocni srazky = 
+-- v dane lokalite
+VAR _tabulka =
+
+ADDCOLUMNS(
+    -- vsechny roky
+    ALL(data[rok]),
+-- jmeno noveho sloupce
+"rocni srazky",
+-- vypocet noveho sloupce
+CALCULATE(SUM(data[Srazky]))
+)
+
+VAR alternativa = MAXX(ALL(data[rok]),CALCULATE(SUM(data[Srazky])))
+RETURN
+MAXX(_tabulka,[rocni srazky])
+
+
