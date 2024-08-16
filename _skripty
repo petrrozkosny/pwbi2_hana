@@ -75,4 +75,16 @@ CALENDAR(
     MIN(dim_datumy2[Date]),MAX(dim_datumy2[Date])),
 [Date],", ")
 
+_____________________________________________
 
+roky agregacni funkce = 
+VAR _roky =
+VALUES(data[rok])
+
+RETURN
+GENERATE(_roky,
+UNION(
+ROW("agregacni_funkce","soucet","vypocet",CALCULATE(SUM(data[Srazky]))),
+ROW("agregacni_funkce","prumer","vypocet",CALCULATE(AVERAGE(data[Srazky]))),
+ROW("agregacni_funkce","maximum","vypocet",CALCULATE(MAX(data[Srazky])))
+))
