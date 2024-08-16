@@ -1,0 +1,15 @@
+50 nejvyssi suma srazek barva = 
+-- suma srazek v dane lokalite
+VAR _suma_srazek = SUM(data[Srazky])
+
+-- maximum ze sum srazek v jednotlivych lokalitach
+VAR _tabulka =
+ ADDCOLUMNS(
+    ALL(data[Lokalita]),
+"suma srazek",
+CALCULATE(SUM(data[Srazky])))
+
+VAR _maximum = MAXX(_tabulka,[suma srazek])
+
+RETURN
+IF(_suma_srazek = _maximum,2,"CYAN")
