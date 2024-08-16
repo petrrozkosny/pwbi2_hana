@@ -53,4 +53,26 @@ CONCATENATEX(
 FILTER(_tabulka,[pocet dnu] = _maximalni_hodnota),
 data[rok],", ")
 
+______________________________________
+
+Míra 4 = 
+
+VAR _interval1 =
+CALCULATE(
+    COUNTROWS(interval1),
+    interval1[od] <=MIN(dim_datumy2[Date])
+    && interval1[do] <=MAX(dim_datumy2[Date]))
+
+VAR _interval2 =
+CALCULATE(
+    COUNTROWS(interval2),
+    interval2[od] <=MIN(dim_datumy2[Date])
+    && interval2[do] <=MAX(dim_datumy2[Date]))
+
+RETURN 
+CONCATENATEX(
+CALENDAR(
+    MIN(dim_datumy2[Date]),MAX(dim_datumy2[Date])),
+[Date],", ")
+
 
